@@ -1,0 +1,49 @@
+from docx import Document
+from docx.shared import Pt
+import random
+
+i=0
+document=Document()
+Tstyle=document.styles["Title"]
+Tstyle.font.size=Pt(12)
+
+while i<1:
+    paragraph = document.add_paragraph()
+    paragraph.style=Tstyle
+    paragraph.add_run("日期:                             计时：                                   签名:")
+
+    table=document.add_table(rows=0,cols=3)
+    document.styles["Normal"].font.size=Pt(15)
+    document.styles["Normal"].font.name='宋体'
+
+    for rows in range(0,8):
+        row_cells=table.add_row().cells
+        for j in range(0,3):
+            x=random.uniform(1,10)
+            y=random.randrange(1,10,1)
+            row_cells[j].text=str("%.1f x %d="%(x,y))
+    table.add_row()
+    for rows in range(0,8):
+        row_cells=table.add_row().cells
+        for j in range(0,3):
+            x=random.uniform(1,10)
+            y=random.randrange(1,10,1)
+            row_cells[j].text=str("%.2f x %d="%(x,y))
+    table.add_row()
+    for rows in range(0,8):
+        row_cells=table.add_row().cells
+        for j in range(0,3):
+            x=random.uniform(1,10)
+            y=random.randrange(10,100,1)
+            row_cells[j].text=str("%.1f x %d="%(x,y))
+    table.add_row()
+    for rows in range(0,8):
+        row_cells=table.add_row().cells
+        for j in range(0,3):
+            x=random.uniform(1,10)
+            y=random.uniform(1,10)
+            row_cells[j].text=str("%.1f x %.1f="%(x,y))    
+    i+=1
+    document.add_page_break()
+
+document.save("C:\\MC_workspace\\code-jam\\autogen_math_homework\\homework.docx")
